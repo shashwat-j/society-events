@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import SocietyCard from '../components/SocietyCard'
 
 const Societies = () => {
 
     const [societies, setSocieties] = useState()
+    const [selected, setSelected] = useState()
 
     function fetchData(){
     fetch("/data/societies.json")
@@ -23,25 +25,12 @@ const Societies = () => {
 
         <h1 className='text-white text-center font-bold text-5xl font-roboto tracking-wide'>Societies</h1>
 
-        <div>
-            <div className='border border-[#FFFFFF26] rounded-xl p-4 flex flex-col gap-2 items-center justify-center'>
-                <div className='h-36 w-36 bg-darkGray'>
-                    <img src={societies?.[0]?.logo} className='rounded-lg h-full w-full object-cover'/>
+        <div className='grid gap-7 grid-cols-2 md:grid-cols-4 my-8 mx-3 lg:mx-0'>
+            {societies?.map((society, index)=>(
+                <div className='mt-2' key={index} onClick={()=>{setSelected(index)}}>
+                    <SocietyCard society={society} isSelected={selected===index} />
                 </div>
-                <div className='w-full'>
-                    <h1 className='text-white text-2xl font-roboto font-medium'>{societies?.[0]?.name}</h1>
-                    <h3 className='text-[#FFFFFFCC] text-sm'>{societies?.[0]?.type}</h3>
-                </div>
-                <div className='flex gap-3 justify-start'>
-                    <div>
-                        <p className='text-[#FFFFFFCC] text-sm'>Registrations-</p>
-                        <p className='text-[#FFFFFFCC] text-sm'>Open</p>
-                    </div>
-                    <button className='px-4 py-1 my-auto text-sm text-white font-semibold rounded-md' style={{
-                        'background': 'linear-gradient(54deg, #F54109 50%, #F5D00B 100%)'
-                    }}>More</button>
-                </div>
-            </div>
+            ))}
         </div>
 
     </div>    

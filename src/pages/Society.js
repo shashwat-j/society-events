@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const Society = () => {
 
-    const [society, setSociety] = useState()
+    // const [society, setSociety] = useState()
+    const location = useLocation()
+    const society = location?.state?.society //This is passed from the previous page using navigate()
     const [aboutIsExpanded, setAboutIsExpanded] = useState(false)
 
-    function fetchData(){
-    fetch("/data/societies.json")
-    .then(response => response.json())
-    .then(json => {;
-            setSociety(json[0])
-        })
-    }
+    // function fetchData(){
+    // fetch("/data/societies.json")
+    // .then(response => response.json())
+    // .then(json => {;
+    //         setSociety(json[0])
+    //     })
+    // }
 
-    useEffect(()=>{
-        fetchData()
-    },[])
+    // useEffect(()=>{
+    //     fetchData()
+    // },[])
 
   return (
     <div className='bg-darkGray min-h-screen flex flex-col gap-6 items-center'>
